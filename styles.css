@@ -1,59 +1,181 @@
+/* FONT (no more times new roman) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg-dark: #0a0a12;
+    --bg-light: #151528;
+    --accent: #7c9cff;
+    --accent2: #a86fff;
+    --text: #e6e9ff;
+    --glass: rgba(255,255,255,0.05);
+}
+
+/* BASE */
+* {
+    box-sizing: border-box;
+}
+
 body {
-  20% {transform: skew(5deg);} 
-  40% {transform: skew(-5deg);} 
-  60% {transform: skew(3deg);} 
-  80% {transform: skew(-3deg);} 
-  100% {transform: skew(0deg);} 
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: radial-gradient(circle at 20% 20%, #1a1a3a, transparent),
+                radial-gradient(circle at 80% 70%, #2a1a3a, transparent),
+                linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.nav {
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-  border-bottom:2px solid transparent;
-  border-image: linear-gradient(90deg, orange, red) 1;
+/* NAV */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: 25px;
+    padding: 15px 30px;
+    backdrop-filter: blur(12px);
+    background: rgba(10,10,20,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.nav a {
-  color:white;
-  margin-left:15px;
-  text-decoration:none;
+nav a {
+    text-decoration: none;
+    color: #cfd6ff;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
 }
 
-.hero {
-  text-align:center;
-  padding:80px;
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: 0.3s;
 }
 
-.cards {
-  display:flex;
-  justify-content:center;
-  gap:20px;
+nav a:hover {
+    color: white;
 }
 
+nav a:hover::after {
+    width: 100%;
+}
+
+/* HEADER */
+header {
+    padding: 100px 20px 60px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+header p {
+    opacity: 0.7;
+}
+
+/* SECTIONS */
+section {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* CARDS (glassmorphism + glow) */
 .card {
-  padding:20px;
-  border:2px solid transparent;
-  border-image: linear-gradient(45deg, orange, red) 1;
-  width:200px;
-  transition:0.3s;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    margin: 25px 0;
+    backdrop-filter: blur(10px);
+    transition: 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.hover-rise:hover {
-  transform: translateY(-10px) scale(1.05);
+/* subtle glow */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(124,156,255,0.2), transparent);
+    opacity: 0;
+    transition: 0.4s;
 }
 
-.fade-in {
-  opacity:0;
-  transform:translateY(20px);
+.card:hover::before {
+    opacity: 1;
 }
 
-.fade-in.show {
-  opacity:1;
-  transform:translateY(0);
-  transition:1s;
+/* lift effect */
+.card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-.content {
-  padding:40px;
+/* CODE */
+.code {
+    background: #05050a;
+    padding: 14px;
+    border-radius: 12px;
+    font-family: monospace;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow-x: auto;
+}
+
+/* TITLES */
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-weight: 600;
+    color: #cbd4ff;
+}
+
+/* LISTS */
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin: 6px 0;
+}
+
+/* BUTTON */
+button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(124,156,255,0.5);
+}
+
+/* SCROLL ANIMATION */
+.card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
