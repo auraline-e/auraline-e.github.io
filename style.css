@@ -1,56 +1,82 @@
-/* base */
+/* BASE */
 body {
     margin: 0;
-    font-family: Arial;
-    color: white;
-    background: linear-gradient(270deg, #0f0f1a, #1f1f3a);
-    background-size: 400% 400%;
-    animation: bg 10s infinite;
+    font-family: Arial, sans-serif;
+    color: #eee;
+    background: black;
 }
 
-/* animacion fondo */
-@keyframes bg {
-    0% { background-position: 0% }
-    50% { background-position: 100% }
-    100% { background-position: 0% }
-}
-
-/* nav */
+/* NAV */
 nav {
-    background: rgba(0,0,0,0.4);
-    padding: 10px;
+    background: rgba(0,0,0,0.9);
+    padding: 12px;
     display: flex;
     gap: 20px;
+    border-bottom: 1px solid rgba(255,140,0,0.3);
 }
 
 nav a {
-    color: white;
+    color: #ccc;
     text-decoration: none;
-}
-
-/* header */
-header {
-    padding: 40px;
-    text-align: center;
-}
-
-/* cards */
-.card {
-    margin: 20px;
-    padding: 20px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
     transition: 0.3s;
 }
 
+nav a:hover {
+    color: orange;
+}
+
+/* HEADERS */
+h1, h2 {
+    color: #ffb347;
+}
+
+/* CARD BASE */
+.card {
+    margin: 20px;
+    padding: 20px;
+    background: #0a0a0a;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* GRADIENT BORDER EFFECT */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, orange, red, gold);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+}
+
+/* HOVER GLOW */
 .card:hover {
+    box-shadow: 0 0 20px rgba(255,140,0,0.4);
     transform: scale(1.02);
 }
 
-/* code */
+/* CODE BLOCK */
 .code {
-    background: black;
-    padding: 10px;
-    border-radius: 8px;
+    background: #050505;
+    padding: 12px;
+    border-radius: 10px;
     font-family: monospace;
+    border: 1px solid rgba(255,140,0,0.2);
+}
+
+/* HEADER */
+header {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth;
 }
