@@ -1,26 +1,35 @@
-// select elements
-const elements = document.querySelectorAll(".card, h1, h2");
+// reveal animation (safe)
+const elements = document.querySelectorAll(".reveal");
 
-// initial state
-elements.forEach(el => {
-    el.style.opacity = 0;
-    el.style.transform = "translateY(40px)";
-    el.style.transition = "all 0.8s ease";
-});
-
-// scroll reveal
-window.addEventListener("scroll", () => {
+const revealOnScroll = () => {
     elements.forEach(el => {
         const top = el.getBoundingClientRect().top;
 
-        if (top < window.innerHeight - 80) {
-            el.style.opacity = 1;
-            el.style.transform = "translateY(0)";
+        if (top < window.innerHeight - 100) {
+            el.classList.add("active");
         }
     });
-});
+};
 
-// simple parallax effect
-window.addEventListener("scroll", () => {
-    document.body.style.backgroundPositionY = window.scrollY * 0.2 + "px";
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+/* tilt effect */
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateX = -(y / rect.height - 0.5) * 10;
+        const rotateY = (x / rect.width - 0.5) * 10;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+    });
 });
